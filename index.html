@@ -5,18 +5,50 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Lizards Rule</title>
+        <title>Book Club - 2021</title>
         <!-- CSS -->
         <!-- Normalize --><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
         <!-- Main --><link href="main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <header></header>
-        <main></main>
-        <footer></footer>
+
+        <header>
+            <h1>book club</h1>
+        </header>
+
+        <!-- BOOKCASE -->
+        <main class="bookcase">
+            <div class="bookcase-title">
+                <h2 class="month"></h2>
+            </div>
+
+            <!-- BOOK DISPLAY -->
+            <div class="bookcase-display hidden">
+                <p class="book-title">here's the book title</p>
+                <p class="book-author">and the author</p>
+                <img class="book-img">
+                <p class="book-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.</p>
+            </div>
+
+            <!-- BOOK RECOMMENDATION -->
+            <div class="bookcase-rec hidden">
+                <p>what should I read next?</p>
+                <form>
+                    <input type="text" name="rec-form-title" id="rec-form-title" placeholder="title.." aria-label="book title">
+                    <input type="text" name="rec-form-author" id="rec-form-author" placeholder="author.." aria-label="book author">
+                    <input type="text" name="rec-form-desc" id="rec-form-desc" placeholder="why.." aria-label="book description">
+                    <button type="submit" value="share">share</button>
+                </form>
+            </div> 
+        </main>
+
+        <footer>
+            <p>&copy; ruairí conway 2021</p>
+        </footer>
 
         <!-- scripts -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+        <script src="library.js"></script>
         <script src="main.js"></script>
     </body>
 </html>
