@@ -4,9 +4,28 @@ img {
     object-fit: cover;
 }
 
-.bookcase {
+.wrapper {
     position: fixed;
     width: 100vw;
     height: 100vh;
+}
+
+.loader {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    background: chartreuse;
+}
+
+.bookcase {
+    position: absolute;
     background: red;
+    width: 100%;
+    height: 100%;
 }

@@ -13,15 +13,18 @@
 // ]
 
 
-const bookcase = document.querySelector('.bookcase')
+// ================ VARIABLES
+
+// scrolling
+const bookcase = document.querySelector('.wrapper')
 const mc = new Hammer(bookcase)
 mc.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
 
 
+// ================ SCROLLING
 function scrollSetup() {
     mc.on("panup", function(e) {
         let scrollDis = e.distance
-        console.log(scrollDis)
         if (scrollDis > 50) {
             $('.bookcase').css("background", "red")
         }
@@ -29,7 +32,6 @@ function scrollSetup() {
 
     mc.on("pandown", function(e) {
         let scrollDis = e.distance
-        console.log(scrollDis)
         if (scrollDis > 50) {
             $('.bookcase').css("background", "yellow")
         }
@@ -39,12 +41,25 @@ function scrollSetup() {
         const scrollYForce = e.originalEvent.deltaY
         if (scrollYForce > 30) {
             console.log('scrolled down')
-            $('.bookcase').css("background", "yellow")
+            $('.bookcase').css("background", "red")
         } else if (scrollYForce < -30) {
             console.log('scrolled up')
-            $('.bookcase').css("background", "red")
+            $('.bookcase').css("background", "yellow")
         }
     })
 }
 
+
+// ================ SHOW
+
+function playLoader() {
+    setTimeout( () => {
+        $('.loader').css("display", "none")
+    }, 2000)
+}
+
+
+// ================ ON LOAD
+
+$(playLoader)
 $(scrollSetup)
