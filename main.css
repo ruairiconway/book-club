@@ -1,0 +1,12 @@
+img {
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.bookcase {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: red;
+}

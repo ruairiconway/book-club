@@ -5,79 +5,46 @@
 // library = [
 //     {
 //         month: "jan",
-//         bookTitle: "humankind: a hopeful history",
+//         bookTitle: "human kind: a hopeful history",
 //         bookAuthor: "Rutger Bregman",
 //         bookDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
 //         cover: ""
 //     }
 // ]
 
-// ============ VARIABLES
 
-const emptyTitle = "tbd"
-const month = library[0].month
-
-
-// ============ GENERATE
-
-function generateBookcaseDisplayHtml() {
-    return `
-    <div class="bookcase-display">
-        <p class="book-title"></p>
-        <p class="book-author"></p>
-        <img class="book-img">
-        <p class="book-desc"></p>
-    </div>`
-}
-
-function generateBookcaseRecHtml() {
-    return `
-    <div class="bookcase-rec">
-        <p>what should I read next?</p>
-        <form>
-            <input type="text" name="rec-form-title" id="rec-form-title" placeholder="title.." aria-label="book title">
-            <input type="text" name="rec-form-author" id="rec-form-author" placeholder="author.." aria-label="book author">
-            <input type="text" name="rec-form-desc" id="rec-form-desc" placeholder="why.." aria-label="book description">
-            <button type="submit" value="share">share</button>
-        </form>
-    </div>`
-}
+const bookcase = document.querySelector('.bookcase')
+const mc = new Hammer(bookcase)
+mc.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
 
 
-// ============ SHOW
-
-function showBookcaseDisplay(bookObject) {
-    let bookcaseDisplayHtml = generateBookcaseDisplayHtml()
-    $('.bookcase').html(`${bookcaseDisplayHtml}`)
-    $('.book-title').html(`${bookObject.bookTitle}`)
-    $('.book-author').html(`${bookObject.bookAuthor}`)
-    $('.book-desc').html(`${bookObject.bookDesc}`)
-}
-
-function showBookcaseRec() {
-    let bookcaseRecHtml = generateBookcaseRecHtml()
-    $('.bookcase').html(`${bookcaseRecHtml}`)
-}
-
-
-// ============ HANDLE
-
-function handleBookcase() {
-    $('.month').html(`${month}`)
-    // based on month, show display page or show rec page
-    for (let i = 0; i < library.length; i++) {
-        if (month === library[i].month) {
-            let bookObject = library[i]
-            if (bookObject.bookTitle === emptyTitle) {
-                showBookcaseRec()
-            } else {
-                showBookcaseDisplay(bookObject)
-            }
+function scrollSetup() {
+    mc.on("panup", function(e) {
+        let scrollDis = e.distance
+        console.log(scrollDis)
+        if (scrollDis > 50) {
+            $('.bookcase').css("background", "red")
         }
-    }
+    })
+
+    mc.on("pandown", function(e) {
+        let scrollDis = e.distance
+        console.log(scrollDis)
+        if (scrollDis > 50) {
+            $('.bookcase').css("background", "yellow")
+        }
+    })
+
+    $(window).on('wheel', (e) => {
+        const scrollYForce = e.originalEvent.deltaY
+        if (scrollYForce > 30) {
+            console.log('scrolled down')
+            $('.bookcase').css("background", "yellow")
+        } else if (scrollYForce < -30) {
+            console.log('scrolled up')
+            $('.bookcase').css("background", "red")
+        }
+    })
 }
 
-
-// ============ ON LOAD
-
-$(handleBookcase)
+$(scrollSetup)

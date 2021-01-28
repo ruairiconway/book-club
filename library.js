@@ -1,17 +1,17 @@
 const library = [
     {
         month: "jan",
-        bookTitle: "humankind: a hopeful history",
+        bookTitle: "human kind: a hopeful history",
         bookAuthor: "Rutger Bregman",
         bookDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
-        cover: ""
+        cover: "./assets/human-kind.jpg"
     },
     {
         month: "feb",
         bookTitle: "1984",
         bookAuthor: "George Orwell",
         bookDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
-        cover: ""
+        cover: "./assets/human-kind.jpg"
     },
     {
         month: "mar",
