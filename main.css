@@ -2,6 +2,8 @@ img {
     display: block;
     max-width: 100%;
     object-fit: cover;
+
+    width: 20%;
 }
 
 .wrapper {
@@ -12,11 +14,10 @@ img {
 
 .loader {
     position: absolute;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    z-index: 1;
     width: 100%;
     height: 100%;
 
@@ -25,7 +26,6 @@ img {
 
 .bookcase {
     position: absolute;
-    background: red;
     width: 100%;
     height: 100%;
 }
