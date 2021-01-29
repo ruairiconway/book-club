@@ -24,6 +24,8 @@ const scrollTarget = '.bookcase'
 const scrollTargetMobile = document.querySelector(scrollTarget)
 const mc = new Hammer(scrollTargetMobile)
 let currentIndex = currentBookObject.index - 1
+// form
+const formEndpoint = 'https://formspree.io/f/xleovrdl'
 
 
 // ================ GENERATE
@@ -55,7 +57,10 @@ function generateRecHtml() {
     $('.bookcase').append(divRec)
     // rec title + form append to bookcase-rec
     let pRec = $('<p>').addClass('rec-title')
-    let formRec = $('<form>').addClass('rec-form')
+    let formRec = $('<form>').attr({
+        action: `${formEndpoint}`,
+        method: 'POST'
+    }).addClass('rec-form')
     $('.bookcase-rec').append(pRec, formRec)
     // form details append to rec-form
     let inputTitle = $('<input>').attr({
