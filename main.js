@@ -16,14 +16,14 @@ library = [
 
 // ================ VARIABLES
 
-// scrolling target
-const scrollTarget = '.bookcase'
-const scrollTargetMobile = document.querySelector(scrollTarget)
-// current date/library object
+// date/library object
 const currentMonthNum = new Date().getMonth()
 const currentBookObject = library[currentMonthNum]
-// handle slide
-let currentIndex = currentBookObject.index
+// navigation
+const scrollTarget = '.bookcase'
+const scrollTargetMobile = document.querySelector(scrollTarget)
+const mc = new Hammer(scrollTargetMobile)
+let currentIndex = currentBookObject.index - 1
 
 
 // ================ GENERATE
@@ -114,57 +114,60 @@ function handleBookcase(object) {
 }
 
 function handleScrollDown() {
+
     if (currentIndex === 11) {
         return
     } else {
-        currentIndex = currentIndex + 1
+        currentIndex++
         let newObject = library[currentIndex]
         handleBookcase(newObject)
     }
-    console.log(currentIndex)
 }
 
 function handleScrollUp() {
     if (currentIndex === 0) {
         return
     } else {
-        currentIndex = currentIndex - 1
+        currentIndex--
         let newObject = library[currentIndex]
         handleBookcase(newObject)
     }
-    console.log(currentIndex)
 }
+
 
 // ================ WATCH
 
+function watchScrollDesktop(e) {
+    $(scrollTarget).off('wheel')
+    const scrollY = e.originalEvent.deltaY
+    if (scrollY > 0) {
+        // execute on scroll DOWN
+        handleScrollDown()
+    } else if (scrollY < 0) {
+        // execute on scroll UP
+        handleScrollUp()
+    }
+    setTimeout( () => {
+        $(scrollTarget).on('wheel', (e) => {
+            watchScrollDesktop(e)
+        })
+    }, 1250)
+}
+
 function watchScroll() {
     // touch / mobile
-    const mc = new Hammer(scrollTargetMobile)
-    mc.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL })
-    mc.on("panup", function(e) {
+    mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+    mc.on('swipeup', () => {
         // execute on scroll DOWN
-        let scrollDis = e.distance
-        if (scrollDis > 50) {
-            handleScrollDown()
-        }
+        handleScrollDown()
     })
-    mc.on("pandown", function(e) {
+    mc.on('swipedown', () => {
         // execute on scroll UP
-        let scrollDis = e.distance
-        if (scrollDis > 50) {
-            handleScrollUp()
-        }
+        handleScrollUp()
     })
     // wheel / desktop
     $(scrollTarget).on('wheel', (e) => {
-        const scrollY = e.originalEvent.deltaY
-        if (scrollY > 30) {
-            // execute on scroll DOWN
-            handleScrollDown()
-        } else if (scrollY < -30) {
-            // execute on scroll UP
-            handleScrollUp()
-        }
+        watchScrollDesktop(e)
     })
 }
 
