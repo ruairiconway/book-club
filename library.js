@@ -4,7 +4,7 @@ const library = [
         month: "jan",
         book: true,
         title: "human kind: a hopeful history",
-        author: "Rutger Bregman",
+        author: "rutger bregman",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
         cover: "./assets/human-kind.jpg"
     },
@@ -13,18 +13,18 @@ const library = [
         month: "feb",
         book: true,
         title: "1984",
-        author: "George Orwell",
+        author: "george orwell",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
         cover: "./assets/human-kind.jpg"
     },
     {
         index: 3,
         month: "mar",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "mythos",
+        author: "stephen fry",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
+        cover: "./assets/human-kind.jpg"
     },
     {
         index: 4,
