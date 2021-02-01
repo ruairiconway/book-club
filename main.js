@@ -1,21 +1,20 @@
 'use strict'
 
 // Library object array linked from library.js
-/*
-library = [
-    {
-         month: "jan",
-         book: true,
-         title: "human kind: a hopeful history",
-         author: "Rutger Bregman",
-         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
-         cover: "./assets/human-kind.jpg"
-    }
-]
-*/
 
 // ================ VARIABLES
-
+// timers
+// == loader
+const loaderDuration = 1500
+const loaderFadeInTime = 750
+// == scroll
+const scrollWatchDelay = 1250
+// == animate
+const animateOutMax = 700 // has to be >= than the rest. It's when handleBookcaseState() kicks in.
+const animateMonthTime = 350
+const animateContentTime = 700
+const animateImgTime = 500
+const animateFormTime = 500
 // date/library object
 const currentMonthNum = new Date().getMonth()
 const currentBookObject = library[currentMonthNum]
@@ -85,7 +84,97 @@ function generateRecHtml() {
 }
 
 
+// ================ ANIMATE
+
+// loader
+function animateLoader() {
+    $('.loader-title').animate({
+        opacity: 1
+    }, loaderFadeInTime, "swing")
+}
+
+// month
+function animateMonthOut() {
+    $('.month').animate({
+        opacity: 0
+    }, animateMonthTime, "swing")
+}
+
+function animateMonthIn() {
+    $('.month').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, animateMonthTime, "swing")
+}
+
+// book
+function animateBookcaseBookOut(object) {
+    animateMonthOut()
+    $('.book-title, .book-author, .book-desc').animate({
+        opacity: 0
+    }, animateContentTime, "swing")
+    $('.book-img').animate({
+        left: "150%"
+    }, animateImgTime, "swing")
+    setTimeout( () => {
+        handleBookcaseState(object)
+    }, animateOutMax)
+}
+
+function animateBookcaseBookIn() {
+    animateMonthIn()
+    $('.book-title, .book-author, .book-desc').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, animateContentTime, "swing")
+    $('.book-img').css({
+        left: "150%"
+    }).animate({
+        left: "50%"
+    }, animateImgTime, "swing")
+}
+
+// rec
+function animateBookcaseRecOut(object) {
+    animateMonthOut()
+    $('.rec-title').animate({
+        opacity: 0
+    }, animateContentTime, "swing")
+    $('.rec-form').animate({
+        left: "100%"
+    }, animateFormTime, "swing")
+    setTimeout( () => {
+        handleBookcaseState(object)
+    }, animateOutMax)
+}
+
+function animateBookcaseRecIn() {
+    animateMonthIn()
+    $('.rec-title').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, animateContentTime, "swing")
+    $('.rec-form').css({
+        left: "100%"
+    }).animate({
+        left: "5%"
+    }, animateFormTime, "swing")
+}
+
+
 // ================ SHOW
+
+function showLoader() {
+    animateLoader()
+    setTimeout( () => {
+        $('.loader').animate({
+            left: "100%"
+        }, 500, "swing")
+    }, loaderDuration)
+}
 
 function showMonth(object) {
     $('.month').text(object.month)
@@ -107,79 +196,6 @@ function showBookImage(object) {
 function showRecDetails() {
     let formHeader = 'know any good books?'
     $('.rec-title').html(formHeader)
-}
-
-function showLoader() {
-    setTimeout( () => {
-        $('.loader').css({
-            "display": "none"
-        })
-    }, 1000)
-}
-
-
-// ================ ANIMATE
-
-// animate out
-function animateMonthOut() {
-    $('.month').animate({
-        opacity: 0
-    }, 500)
-}
-
-function animateBookcaseBookOut(object) {
-    animateMonthOut()
-    $('.book-title, .book-author, .book-desc').animate({
-        opacity: 0
-    }, 500)
-    $('.book-img').animate({
-        // animate BOOK IMAGE OUT
-    }, 500)
-    setTimeout( () => {
-        handleBookcaseState(object)
-    }, 500)
-}
-
-function animateBookcaseRecOut(object) {
-    animateMonthOut()
-    $('.rec-title, .rec-form-title, .rec-form-author, .rec-submit').animate({
-        opacity: 0
-    }, 500)
-    setTimeout( () => {
-        handleBookcaseState(object)
-    }, 500)
-}
-
-// animate in
-function animateMonthIn() {
-    $('.month').css({
-        opacity: 0
-    }).animate({
-        opacity: 1
-    }, 500)
-}
-
-function animateBookcaseBookIn() {
-    animateMonthIn()
-    $('.book-title, .book-author, .book-desc').css({
-        opacity: 0
-    }).animate({
-        opacity: 1
-    }, 500)
-    $('.book-img').css({
-
-    }).animate({
-        // animate BOOK IMAGE IN
-    }, 500)
-}
-
-function animateBookcaseRecIn() {
-    animateMonthIn()
-    $('.rec-title, .rec-form-title, .rec-form-author, .rec-submit').css({
-        opacity: 0
-    }).animate({
-        opacity: 1
-    }, 500)
 }
 
 
@@ -249,7 +265,7 @@ function watchDesktopScrollTimer(e) {
     }
     setTimeout( () => {
         watchDesktopScroll()
-    }, 1250)
+    }, scrollWatchDelay)
 }
 
 function watchDesktopScroll () {
