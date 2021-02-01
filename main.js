@@ -23,7 +23,7 @@ const currentBookObject = library[currentMonthNum]
 const scrollTarget = '.bookcase'
 const scrollTargetMobile = document.querySelector(scrollTarget)
 const mc = new Hammer(scrollTargetMobile)
-let currentIndex = currentBookObject.index - 1
+let currentIndex = currentBookObject.index - 1 // -1 to match object index to array index
 // form
 const formEndpoint = 'https://formspree.io/f/xleovrdl'
 
@@ -87,45 +87,135 @@ function generateRecHtml() {
 
 // ================ SHOW
 
-function showBook(object) {
+function showMonth(object) {
+    $('.month').text(object.month)
+}
+
+function showBookDetails(object) {
     $('.book-title').html(object.title)
     $('.book-author').html(object.author)
-    $('.book-img').attr({
-        src: `${object.cover}`,
-        alt: `cover artwork for "${object.title}"`
-    }).html()
     $('.book-desc').html(object.desc)
 }
 
-function showRec() {
+function showBookImage(object) {
+    $('.book-img').attr({
+        src: `${object.cover}`,
+        alt: `cover artwork for "${object.title}"`
+    })
+}
+
+function showRecDetails() {
     let formHeader = 'know any good books?'
     $('.rec-title').html(formHeader)
+}
+
+function showLoader() {
+    setTimeout( () => {
+        $('.loader').css({
+            "display": "none"
+        })
+    }, 1000)
+}
+
+
+// ================ ANIMATE
+
+// animate out
+function animateMonthOut() {
+    $('.month').animate({
+        opacity: 0
+    }, 500)
+}
+
+function animateBookcaseBookOut(object) {
+    animateMonthOut()
+    $('.book-title, .book-author, .book-desc').animate({
+        opacity: 0
+    }, 500)
+    $('.book-img').animate({
+        // animate BOOK IMAGE OUT
+    }, 500)
+    setTimeout( () => {
+        handleBookcaseState(object)
+    }, 500)
+}
+
+function animateBookcaseRecOut(object) {
+    animateMonthOut()
+    $('.rec-title, .rec-form-title, .rec-form-author, .rec-submit').animate({
+        opacity: 0
+    }, 500)
+    setTimeout( () => {
+        handleBookcaseState(object)
+    }, 500)
+}
+
+// animate in
+function animateMonthIn() {
+    $('.month').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, 500)
+}
+
+function animateBookcaseBookIn() {
+    animateMonthIn()
+    $('.book-title, .book-author, .book-desc').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, 500)
+    $('.book-img').css({
+
+    }).animate({
+        // animate BOOK IMAGE IN
+    }, 500)
+}
+
+function animateBookcaseRecIn() {
+    animateMonthIn()
+    $('.rec-title, .rec-form-title, .rec-form-author, .rec-submit').css({
+        opacity: 0
+    }).animate({
+        opacity: 1
+    }, 500)
 }
 
 
 // ================ HANDLE
 
-function handleBookcase(object) {
-    // if a book is filled in for that month
+function handleBookcaseState(object) {
+    // reset html
     $('.bookcase').html('')
+    // if book is found i.e. 'true'
     if (object.book) {
         generateBookHtml()
-        showBook(object)
+        showMonth(object)
+        showBookDetails(object)
+        showBookImage(object)
+        animateBookcaseBookIn()
+    // if not
     } else {
         generateRecHtml()
-        showRec()
+        showMonth(object)
+        showRecDetails()
+        animateBookcaseRecIn()
     }
-    $('.month').text(object.month)
 }
 
 function handleScrollDown() {
-
     if (currentIndex === 11) {
         return
     } else {
+        let currentObject = library[currentIndex]
         currentIndex++
-        let newObject = library[currentIndex]
-        handleBookcase(newObject)
+        let nextObject = library[currentIndex] 
+        if (currentObject.book) {
+            animateBookcaseBookOut(nextObject)
+        } else {
+            animateBookcaseRecOut(nextObject)
+        }
     }
 }
 
@@ -133,16 +223,21 @@ function handleScrollUp() {
     if (currentIndex === 0) {
         return
     } else {
+        let currentObject = library[currentIndex]
         currentIndex--
-        let newObject = library[currentIndex]
-        handleBookcase(newObject)
+        let prevObject = library[currentIndex] 
+        if (currentObject.book) {
+            animateBookcaseBookOut(prevObject)
+        } else {
+            animateBookcaseRecOut(prevObject)
+        }
     }
 }
 
 
 // ================ WATCH
 
-function watchScrollDesktop(e) {
+function watchDesktopScrollTimer(e) {
     $(scrollTarget).off('wheel')
     const scrollY = e.originalEvent.deltaY
     if (scrollY > 0) {
@@ -153,10 +248,14 @@ function watchScrollDesktop(e) {
         handleScrollUp()
     }
     setTimeout( () => {
-        $(scrollTarget).on('wheel', (e) => {
-            watchScrollDesktop(e)
-        })
+        watchDesktopScroll()
     }, 1250)
+}
+
+function watchDesktopScroll () {
+    $(scrollTarget).on('wheel', (e) => {
+        watchDesktopScrollTimer(e)
+    })
 }
 
 function watchScroll() {
@@ -171,23 +270,12 @@ function watchScroll() {
         handleScrollUp()
     })
     // wheel / desktop
-    $(scrollTarget).on('wheel', (e) => {
-        watchScrollDesktop(e)
-    })
-}
-
-
-// ================ SHOW
-
-function playLoader() {
-    setTimeout( () => {
-        $('.loader').css("display", "none")
-    }, 1000)
+    watchDesktopScroll()
 }
 
 
 // ================ ON LOAD
 
-$(playLoader)
+$(handleBookcaseState(currentBookObject))
+$(showLoader)
 $(watchScroll)
-$(handleBookcase(currentBookObject))
