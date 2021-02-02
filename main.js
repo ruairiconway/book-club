@@ -30,51 +30,45 @@ const formEndpoint = 'https://formspree.io/f/xleovrdl'
 // ================ GENERATE
 
 function generateBookcaseTitle() {
-    let divTitle = $('<div>').addClass('bookcase-title')
-    $('.bookcase').prepend(divTitle)
     let h2Title = $('<h2>').addClass('month')
-    $('.bookcase-title').append(h2Title)
+    $('.bookcase').append(h2Title)
 }
 
 function generateBookHtml() {
     generateBookcaseTitle()
-    // bookcase-book div append to bookcase
-    let divBook = $('<div>').addClass('bookcase-book')
-    $('.bookcase').append(divBook)
-    // book details append to bookcase-book
+    // book details append to bookcase
     let pTitle = $('<p>').addClass('book-title')
     let pAuthor = $('<p>').addClass('book-author')
     let imgCover = $('<img>').addClass('book-img')
     let pDesc = $('<p>').addClass('book-desc')
-    $('.bookcase-book').append(pTitle, pAuthor, imgCover, pDesc)
+    $('.bookcase').append(pTitle, pAuthor, imgCover, pDesc)
 }
 
 function generateRecHtml() {
     generateBookcaseTitle()
-    // bookcase-rec div append to bookcase
-    let divRec = $('<div>').addClass('bookcase-rec')
-    $('.bookcase').append(divRec)
-    // rec title + form append to bookcase-rec
+    // rec title + form append to bookcase
     let pRec = $('<p>').addClass('rec-title')
     let formRec = $('<form>').attr({
         action: `${formEndpoint}`,
         method: 'POST'
     }).addClass('rec-form')
-    $('.bookcase-rec').append(pRec, formRec)
+    $('.bookcase').append(pRec, formRec)
     // form details append to rec-form
     let inputTitle = $('<input>').attr({
         type: "text",
         name: "rec-form-title",
         id: "rec-form-title",
         placeholder: "title..",
-        "aria-label": "book title" 
+        "aria-label": "book title",
+        required: true
     }).addClass('rec-form-author')
     let inputAuthor = $('<input>').attr({
         type: "text",
         name: "rec-form-author",
         id: "rec-form-author",
         placeholder: "author..",
-        "aria-label": "book author" 
+        "aria-label": "book author",
+        required: true
     }).addClass('rec-form-author')
     let buttonSub = $('<button>').attr({
         type: "submit",
@@ -110,12 +104,13 @@ function animateMonthIn() {
 
 // book
 function animateBookcaseBookOut(object) {
+    const imgWidth = $('.book-img').css('width')
     animateMonthOut()
     $('.book-title, .book-author, .book-desc').animate({
         opacity: 0
     }, animateContentTime, "swing")
     $('.book-img').animate({
-        left: "150%"
+        right: `-${imgWidth}`
     }, animateImgTime, "swing")
     setTimeout( () => {
         handleBookcaseState(object)
@@ -123,6 +118,7 @@ function animateBookcaseBookOut(object) {
 }
 
 function animateBookcaseBookIn() {
+    const imgWidth = $('.book-img').css('width')
     animateMonthIn()
     $('.book-title, .book-author, .book-desc').css({
         opacity: 0
@@ -130,20 +126,21 @@ function animateBookcaseBookIn() {
         opacity: 1
     }, animateContentTime, "swing")
     $('.book-img').css({
-        left: "150%"
+        right: `-${imgWidth}`
     }).animate({
-        left: "50%"
+        right: 0
     }, animateImgTime, "swing")
 }
 
 // rec
 function animateBookcaseRecOut(object) {
+    const recFormWidth = $('.rec-form').css('width')
     animateMonthOut()
     $('.rec-title').animate({
         opacity: 0
     }, animateContentTime, "swing")
     $('.rec-form').animate({
-        left: "100%"
+        right: `-${recFormWidth}`
     }, animateFormTime, "swing")
     setTimeout( () => {
         handleBookcaseState(object)
@@ -151,6 +148,7 @@ function animateBookcaseRecOut(object) {
 }
 
 function animateBookcaseRecIn() {
+    const recFormWidth = $('.rec-form').css('width')
     animateMonthIn()
     $('.rec-title').css({
         opacity: 0
@@ -158,9 +156,9 @@ function animateBookcaseRecIn() {
         opacity: 1
     }, animateContentTime, "swing")
     $('.rec-form').css({
-        left: "100%"
+        right: `-${recFormWidth}`
     }).animate({
-        left: "5%"
+        right: 0
     }, animateFormTime, "swing")
 }
 
