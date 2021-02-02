@@ -1,31 +1,175 @@
+/* ========== GENERAL ========== */
+
 img {
     display: block;
     max-width: 100%;
     object-fit: cover;
-
-    width: 20%;
 }
 
+body {
+    margin: 0;
+}
+
+/* ========== TYPESTYLES ========== */
+/* 
+font-family: 'Righteous', cursive; 
+font-family: 'Poppins', sans-serif;
+*/
+
+html {
+    font-size: 10px;
+}
+
+.loader-title,
+.month,
+.book-title,
+.book-author,
+.rec-submit {
+    margin: 0;
+    font-family: 'Righteous', serif;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.book-desc,
+.rec-title,
+.rec-form-title,
+.rec-form-author {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.loader-title,
+.month {
+    font-size: 5rem;
+}
+
+.book-title,
+.book-author,
+.rec-form-title,
+.rec-form-author,
+.rec-submit {
+    font-size: 2.5rem;
+}
+
+.book-desc,
+.rec-title {
+    font-size: 1.6rem;
+}
+
+
+/* ========== LAYOUT ========== */
+
+/* base */
 .wrapper {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
 }
 
+.bookcase {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* loader */
 .loader {
     position: absolute;
-    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    z-index: 1;
 
-    background: chartreuse;
+    background: #000;
+    color: #fff;
 }
 
-.bookcase {
+/* month */
+.loader-title {
+    opacity: 0;
+}
+
+.month {
     position: absolute;
+    margin: 0 5%;
+    padding: 1rem;
+    left: 0;
+    top: 5%;
+}
+
+/* book */
+.book-author {
+    position: absolute;
+    text-align: right;
+    margin: 0 5%;
+    padding: 1rem;
+    right: 0;
+    top: 55%;
+
+    background: #fff;
+}
+
+.book-title {
+    position: absolute;
+    margin: 0 5%;
+    padding: 1rem;
+    left: 0;
+    bottom: 50%;
+
+    background: #fff;
+}
+
+.book-img {
+    position: absolute;
+    width: 75%;
+    /* max-height: 60%; */
+    z-index: -1;
+    right: 0;
+    top: 10%;
+}
+
+.book-desc {
+    position: absolute;
+    margin: 0 5%;
+    padding: 1rem;
+    bottom: 5%;
+
+    background: #fff;
+}
+
+/* rec */
+.rec-title {
+    position: absolute;
+    margin: 0 5%;
+    padding: 1rem;
+    left: 0;
+    top: 20%;
+}
+
+.rec-form {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
     width: 100%;
-    height: 100%;
+    height: 30%;
+    right: 0;
+    top: 33%;
+}
+
+.rec-form-title,
+.rec-form-author {
+    margin: 0 0 0 5%;
+    padding: 0 1rem;
+}
+
+.rec-submit {
+    margin: 0 5%;
 }
