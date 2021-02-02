@@ -31,29 +31,26 @@ const formEndpoint = 'https://formspree.io/f/xleovrdl'
 
 function generateBookcaseTitle() {
     let h2Title = $('<h2>').addClass('month')
-    $('.bookcase').append(h2Title)
+    $('.bookcase').append(h2Title) // append month to bookcase
 }
 
 function generateBookHtml() {
     generateBookcaseTitle()
-    // book details append to bookcase
     let pTitle = $('<p>').addClass('book-title')
     let pAuthor = $('<p>').addClass('book-author')
     let imgCover = $('<img>').addClass('book-img')
     let pDesc = $('<p>').addClass('book-desc')
-    $('.bookcase').append(pTitle, pAuthor, imgCover, pDesc)
+    $('.bookcase').append(pTitle, pAuthor, imgCover, pDesc) // append book details to bookcase
 }
 
 function generateRecHtml() {
     generateBookcaseTitle()
-    // rec title + form append to bookcase
     let pRec = $('<p>').addClass('rec-title')
     let formRec = $('<form>').attr({
         action: `${formEndpoint}`,
         method: 'POST'
     }).addClass('rec-form')
-    $('.bookcase').append(pRec, formRec)
-    // form details append to rec-form
+    $('.bookcase').append(pRec, formRec) // rec title + form append to bookcase
     let inputTitle = $('<input>').attr({
         type: "text",
         name: "rec-form-title",
@@ -74,27 +71,25 @@ function generateRecHtml() {
         type: "submit",
         value: "share"
     }).addClass('rec-submit').text('share')
-    $('.rec-form').append(inputTitle, inputAuthor, buttonSub)
+    $('.rec-form').append(inputTitle, inputAuthor, buttonSub) // form items append to rec-form
 }
 
 
 // ================ ANIMATE
 
-// loader
-function animateLoader() {
+function animateLoader() { // loader
     $('.loader-title').animate({
         opacity: 1
     }, loaderFadeInTime, "swing")
 }
 
-// month
-function animateMonthOut() {
+function animateMonthOut() { // month out
     $('.month').animate({
         opacity: 0
     }, animateMonthTime, "swing")
 }
 
-function animateMonthIn() {
+function animateMonthIn() { // month in
     $('.month').css({
         opacity: 0
     }).animate({
@@ -102,8 +97,7 @@ function animateMonthIn() {
     }, animateMonthTime, "swing")
 }
 
-// book
-function animateBookcaseBookOut(object) {
+function animateBookcaseBookOut(object) { // book out
     const imgWidth = $('.book-img').css('width')
     animateMonthOut()
     $('.book-title, .book-author, .book-desc').animate({
@@ -117,7 +111,7 @@ function animateBookcaseBookOut(object) {
     }, animateOutMax)
 }
 
-function animateBookcaseBookIn() {
+function animateBookcaseBookIn() { // book in
     const imgWidth = $('.book-img').css('width')
     animateMonthIn()
     $('.book-title, .book-author, .book-desc').css({
@@ -132,8 +126,7 @@ function animateBookcaseBookIn() {
     }, animateImgTime, "swing")
 }
 
-// rec
-function animateBookcaseRecOut(object) {
+function animateBookcaseRecOut(object) { // rec out
     const recFormWidth = $('.rec-form').css('width')
     animateMonthOut()
     $('.rec-title').animate({
@@ -147,7 +140,7 @@ function animateBookcaseRecOut(object) {
     }, animateOutMax)
 }
 
-function animateBookcaseRecIn() {
+function animateBookcaseRecIn() { // rec in
     const recFormWidth = $('.rec-form').css('width')
     animateMonthIn()
     $('.rec-title').css({
@@ -165,7 +158,7 @@ function animateBookcaseRecIn() {
 
 // ================ SHOW
 
-function showLoader() {
+function showLoader() { // loader
     animateLoader()
     setTimeout( () => {
         $('.loader').animate({
@@ -174,24 +167,24 @@ function showLoader() {
     }, loaderDuration)
 }
 
-function showMonth(object) {
+function showMonth(object) {  // month
     $('.month').text(object.month)
 }
 
-function showBookDetails(object) {
+function showBookDetails(object) {  // book details
     $('.book-title').html(object.title)
     $('.book-author').html(object.author)
     $('.book-desc').html(object.desc)
 }
 
-function showBookImage(object) {
+function showBookImage(object) { // book image
     $('.book-img').attr({
         src: `${object.cover}`,
         alt: `cover artwork for "${object.title}"`
     })
 }
 
-function showRecDetails() {
+function showRecDetails() {  // rec details
     let formHeader = 'know any good books?'
     $('.rec-title').html(formHeader)
 }
@@ -200,17 +193,14 @@ function showRecDetails() {
 // ================ HANDLE
 
 function handleBookcaseState(object) {
-    // reset html
-    $('.bookcase').html('')
-    // if book is found i.e. 'true'
-    if (object.book) {
+    $('.bookcase').html('') // reset html
+    if (object.book) { // if book is found i.e. 'true'
         generateBookHtml()
         showMonth(object)
         showBookDetails(object)
         showBookImage(object)
         animateBookcaseBookIn()
-    // if not
-    } else {
+    } else { // if not
         generateRecHtml()
         showMonth(object)
         showRecDetails()
@@ -219,30 +209,30 @@ function handleBookcaseState(object) {
 }
 
 function handleScrollDown() {
-    if (currentIndex === 11) {
+    if (currentIndex === 11) { // if index is at the end
         return
-    } else {
+    } else { // prep next object and animate out
         let currentObject = library[currentIndex]
         currentIndex++
         let nextObject = library[currentIndex] 
-        if (currentObject.book) {
+        if (currentObject.book) { // if current object is book transition book out
             animateBookcaseBookOut(nextObject)
-        } else {
+        } else { // if current object is rec transition rec out
             animateBookcaseRecOut(nextObject)
         }
     }
 }
 
 function handleScrollUp() {
-    if (currentIndex === 0) {
+    if (currentIndex === 0) { // if index is at the start
         return
-    } else {
+    } else { // prep prev object and animate out
         let currentObject = library[currentIndex]
         currentIndex--
         let prevObject = library[currentIndex] 
-        if (currentObject.book) {
+        if (currentObject.book) { // if current object is book transition book out
             animateBookcaseBookOut(prevObject)
-        } else {
+        } else { // if current object is rec transition rec out
             animateBookcaseRecOut(prevObject)
         }
     }
@@ -251,45 +241,52 @@ function handleScrollUp() {
 
 // ================ WATCH
 
-function watchDesktopScrollTimer(e) {
-    $(scrollTarget).off('wheel')
-    const scrollY = e.originalEvent.deltaY
-    if (scrollY > 0) {
-        // execute on scroll DOWN
-        handleScrollDown()
-    } else if (scrollY < 0) {
-        // execute on scroll UP
-        handleScrollUp()
-    }
-    setTimeout( () => {
-        watchDesktopScroll()
-    }, scrollWatchDelay)
+function watchDesktopScroll() {
+    // mouse
+    $(scrollTarget).on('wheel', (e) => {
+        const scrollY = e.originalEvent.deltaY
+        $(scrollTarget).off('wheel') // pause watch
+        if (scrollY > 0) { // execute on scroll DOWN
+            handleScrollDown()
+        } else if (scrollY < 0) { // execute on scroll UP
+            handleScrollUp()
+        }
+        setTimeout( () => { // restart watch
+            watchDesktopScroll()
+        }, scrollWatchDelay)
+    })
+    // key
+    $(window).on('keydown', (e) => {
+        const keyCode = e.originalEvent.keyCode
+        $(window).off('keydown') // pause watch
+        if (keyCode === 40) { // execute on arrow DOWN
+            handleScrollDown()
+        } else if (keyCode === 38) { // execute on arrow UP
+            handleScrollUp()
+        }
+        setTimeout( () => { // restart watch
+            watchDesktopScroll()
+        }, scrollWatchDelay)
+    })
 }
 
-function watchDesktopScroll () {
-    $(scrollTarget).on('wheel', (e) => {
-        watchDesktopScrollTimer(e)
+function watchMobileScroll() { // initialize hammer plug-in
+    mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+    mc.on('swipeup', () => {
+        handleScrollDown() // execute on swipe UP
+    })
+    mc.on('swipedown', () => {
+        handleScrollUp() // execute on swipe DOWN
     })
 }
 
 function watchScroll() {
-    // touch / mobile
-    mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
-    mc.on('swipeup', () => {
-        // execute on scroll DOWN
-        handleScrollDown()
-    })
-    mc.on('swipedown', () => {
-        // execute on scroll UP
-        handleScrollUp()
-    })
-    // wheel / desktop
-    watchDesktopScroll()
+    watchMobileScroll() // touch
+    watchDesktopScroll() // wheel / keycode
 }
 
 
 // ================ ON LOAD
-
-$(handleBookcaseState(currentBookObject))
-$(showLoader)
-$(watchScroll)
+$(handleBookcaseState(currentBookObject)) // initialize bookcase
+$(showLoader) // initialize loader
+$(watchScroll) // initialize scroll behavior
