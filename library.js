@@ -5,7 +5,7 @@ const library = [
         book: true,
         title: "human kind: a hopeful history",
         author: "rutger bregman",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices.",
         cover: "./assets/human-kind.jpg"
     },
     {
@@ -14,7 +14,7 @@ const library = [
         book: true,
         title: "1984",
         author: "george orwell",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices.",
         cover: "./assets/human-kind.jpg"
     },
     {
@@ -23,7 +23,7 @@ const library = [
         book: true,
         title: "mythos",
         author: "stephen fry",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices, lacinia dolor congue, scelerisque vivamus.",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices.",
         cover: "./assets/human-kind.jpg"
     },
     {
