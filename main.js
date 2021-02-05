@@ -167,7 +167,7 @@ function showLoader() { // loader
     animateLoader()
     setTimeout( () => {
         $('.loader').animate({
-            left: "100%"
+            top: "-100%"
         }, 500, "swing")
     }, loaderDuration)
 }
