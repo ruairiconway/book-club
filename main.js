@@ -124,7 +124,7 @@ function animateBookcaseBookIn() { // book in
         opacity: 1
     }, animateContentTime, "swing")
     $('.book-img').css({
-        left: "150%",
+        left: "140%"
     }).animate({
         left: "50%"
     }, animateImgTime, "swing")
