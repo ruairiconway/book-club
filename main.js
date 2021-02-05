@@ -19,7 +19,7 @@ const animateFormTime = 500
 const currentMonthNum = new Date().getMonth()
 const currentBookObject = library[currentMonthNum]
 // navigation
-const scrollTarget = '.bookcase'
+const scrollTarget = '.wrapper'
 const scrollTargetMobile = document.querySelector(scrollTarget)
 const mc = new Hammer(scrollTargetMobile)
 let currentIndex = currentBookObject.index - 1 // -1 to match object index to array index
