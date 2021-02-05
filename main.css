@@ -191,7 +191,7 @@ button {
     align-items: center;
 }
 
-.book-img {
+.book-img { /* image ratio - 5.5 x 8.5 */
     background-blend-mode: multiply;
     background-color: var(--main);
     background-size: cover;
