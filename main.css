@@ -1,5 +1,9 @@
 /* ========== GENERAL ========== */
 
+* {
+    box-sizing: border-box;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -32,7 +36,7 @@ html {
 }
 
 .book-desc,
-.rec-title,
+.rec-text,
 .rec-form-title,
 .rec-form-author {
     margin: 0;
@@ -54,7 +58,7 @@ html {
 }
 
 .book-desc,
-.rec-title {
+.rec-text {
     font-size: 1.6rem;
 }
 
@@ -72,6 +76,8 @@ html {
 }
 
 .bookcase {
+    display: flex;
+    flex-flow: column nowrap;
     position: relative;
     width: 100%;
     height: 100%;
@@ -91,67 +97,97 @@ html {
     color: #fff;
 }
 
+.detail-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 5%;
+}
+
+.img-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 /* month */
 .loader-title {
     opacity: 0;
 }
 
 .month {
-    position: absolute;
-    margin: 0 5%;
-    padding: 1rem;
-    left: 0;
-    top: 5%;
+
 }
 
 /* book */
 .book-author {
-    position: absolute;
-    text-align: right;
-    margin: 0 5%;
-    padding: 1rem;
-    right: 0;
-    top: 55%;
-
-    background: #fff;
+    align-self: flex-end;
 }
 
 .book-title {
-    position: absolute;
-    margin: 0 5%;
-    padding: 1rem;
-    left: 0;
-    bottom: 50%;
 
-    background: #fff;
 }
 
 .book-img {
     position: absolute;
-    width: 75%;
-    /* max-height: 60%; */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 70%;
+    max-height: 70%;
     z-index: -1;
-    right: 0;
-    top: 10%;
 }
 
-.book-desc {
-    position: absolute;
-    margin: 0 5%;
-    padding: 1rem;
-    bottom: 5%;
+@media (min-width: 500px) {
 
-    background: #fff;
+    .bookcase {
+        display: flex;
+    }
+
+    .detail-wrapper {
+        width: 50%;
+    }
+
+    .img-wrapper {
+        position: relative;
+        width: 50%;
+    }
+
+    .book-img {
+        max-width: 75%;
+        max-height: 75%;
+    }
+
 }
 
 /* rec */
-.rec-title {
-    position: absolute;
-    margin: 0 5%;
-    padding: 1rem;
-    left: 0;
-    top: 20%;
+
+.rec-text-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 50%;
+    padding: 5%;
+}
+
+.rec-text {
     text-transform: capitalize;
+}
+
+.rec-form-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .rec-form {
@@ -160,14 +196,13 @@ html {
     flex-flow: column nowrap;
     justify-content: space-between;
     width: 100%;
-    height: 30%;
-    right: 0;
-    top: 33%;
+    height: 90%;
+    padding: 5% 0 5% 5%;
 }
 
 .rec-form-title,
 .rec-form-author {
-    margin: 0 0 0 5%;
+    width: 100%;
     padding: 0.75rem 1rem;
 
     background: #000;
@@ -182,10 +217,40 @@ html {
 }
 
 .rec-submit {
-    margin: 0 5%;
     padding: 0.75rem 1rem;
 
     background: #000;
     color: #fff;
     border: none;
+}
+
+@media (min-width: 500px) {
+
+    .bookcase {
+        flex-flow: row nowrap;
+    }
+
+    .rec-text-wrapper {
+        justify-content: flex-start;
+        width: 50%;
+        height: 100%;
+    }
+
+    .rec-header-wrapper {
+        margin: 7rem 0 0 0;
+    }
+
+    .rec-form-wrapper {
+        width: 50%;
+        height: 100%;
+    }
+
+    .rec-form {
+        height: 40%;
+    }
+/*
+    .rec-submit {
+        align-self: flex-start;
+    } */
+
 }
