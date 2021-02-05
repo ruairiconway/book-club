@@ -1,3 +1,14 @@
+/* Color guide */
+
+:root {
+    --main: #3626A7;
+    --accent: #261B77;
+    --light: #FFF;
+    --dark: #000;
+    --background: #BECCD4;
+}
+
+
 /* ========== GENERAL ========== */
 
 * {
@@ -14,9 +25,10 @@ body {
     margin: 0;
 }
 
+
 /* ========== TYPESTYLES ========== */
 /* 
-font-family: 'Righteous', cursive; 
+font-family: 'Work Sans', serif; 
 font-family: 'Poppins', sans-serif;
 */
 
@@ -24,42 +36,68 @@ html {
     font-size: 10px;
 }
 
+h1,
+h2,
+p,
+input,
+button {
+    margin: 0
+}
+
 .loader-title,
 .month,
 .book-title,
 .book-author,
 .rec-submit {
-    margin: 0;
-    font-family: 'Righteous', serif;
-    font-weight: 400;
-    text-transform: capitalize;
-}
-
-.book-desc,
-.rec-text,
-.rec-form-title,
-.rec-form-author {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200;
+    font-family: 'Work Sans', serif;
 }
 
 .loader-title,
+.month {
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.loader-title {
+    font-size: 2.5rem;
+}
+
 .month {
     font-size: 5rem;
 }
 
 .book-title,
 .book-author,
-.rec-form-title,
-.rec-form-author,
 .rec-submit {
+    font-weight: 600;
+    text-transform: capitalize;
     font-size: 2.5rem;
+    letter-spacing: 1.2px;
+    line-height: 3.5rem;
+}
+
+.book-desc,
+.rec-text,
+.rec-form-title,
+.rec-form-author {
+    font-family: 'Poppins', sans-serif;
 }
 
 .book-desc,
 .rec-text {
+    font-weight: 200;
     font-size: 1.6rem;
+    line-height: 2.3rem;
+    letter-spacing: 0.2px;
+}
+
+.rec-form-title,
+.rec-form-author {
+    font-weight: 200;
+    font-size: 2.5rem;
+    letter-spacing: 1.2px;
+    line-height: 3.5rem;
 }
 
 
@@ -68,19 +106,8 @@ html {
 /* base */
 .wrapper {
     position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
-}
-
-.bookcase {
-    display: flex;
-    flex-flow: column nowrap;
-    position: relative;
-    width: 100%;
-    height: 100%;
 }
 
 /* loader */
@@ -89,14 +116,40 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
     width: 100%;
     height: 100%;
-    z-index: 1;
-
-    background: #000;
-    color: #fff;
+    background: var(--main);
 }
 
+.loader-title {
+    opacity: 0;
+    padding: 0.5rem 1.5rem;
+    color: var(--light);
+    border: solid var(--light);
+    border-width: 5px 0 0 0;
+}
+
+/* bookcase */
+.bookcase {
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+    height: 100%;
+    z-index: -2;
+    background: var(--background);
+}
+
+/* month */
+.month {
+    align-self: flex-start;
+    padding: 0.5rem 1.5rem;
+    color: var(--main);
+    border: solid var(--light);
+    border-width: 5px 0 0 0;
+}
+
+/* book details */
 .detail-wrapper {
     display: flex;
     flex-flow: column nowrap;
@@ -106,6 +159,27 @@ html {
     padding: 5%;
 }
 
+.book-title,
+.book-author,
+.book-desc {
+    padding: 0.5rem 1.5rem;
+    background: var(--light);
+    color: var(--main);
+}
+
+.book-title {
+    align-self: flex-start;
+}
+
+.book-author {
+    align-self: flex-end;
+}
+
+.book-desc {
+    color: var(--dark);
+}
+
+/* book image */
 .img-wrapper {
     position: absolute;
     top: 0;
@@ -117,57 +191,46 @@ html {
     align-items: center;
 }
 
-/* month */
-.loader-title {
-    opacity: 0;
-}
-
-.month {
-
-}
-
-/* book */
-.book-author {
-    align-self: flex-end;
-}
-
-.book-title {
-
-}
-
 .book-img {
+    background-blend-mode: multiply;
+    background-color: var(--main);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 70%;
-    max-height: 70%;
-    z-index: -1;
+    width: 75%;
+    height: 65%;
+    -webkit-box-shadow: 5px 5px 0 0 var(--light);
+    box-shadow: 5px 5px 0 0 var(--light);
 }
 
-@media (min-width: 500px) {
-
-    .bookcase {
-        display: flex;
-    }
+/* ===== bookcase - book break at 500px  ====== */
+@media (min-width: 550px) {
 
     .detail-wrapper {
+        height: 80%;
         width: 50%;
     }
 
     .img-wrapper {
         position: relative;
         width: 50%;
+        background: var(--main);
     }
 
     .book-img {
-        max-width: 75%;
-        max-height: 75%;
+        background-blend-mode: unset;
+        width: 55%;
+        height: 75%;
+        -webkit-box-shadow: 5px 5px 0 0 var(--dark);
+        box-shadow: 5px 5px 0 0 var(--dark);
     }
 
 }
 
-/* rec */
-
+/* rec text */
 .rec-text-wrapper {
     display: flex;
     flex-flow: column nowrap;
@@ -176,10 +239,18 @@ html {
     padding: 5%;
 }
 
-.rec-text {
-    text-transform: capitalize;
+.rec-header-wrapper {
+    align-self: flex-start;
 }
 
+.rec-text {
+    align-self: flex-start;
+    padding: 0.5rem 1.5rem;
+    text-transform: capitalize;
+    background: var(--light);
+}
+
+/* rec form */
 .rec-form-wrapper {
     position: relative;
     top: 0;
@@ -201,30 +272,45 @@ html {
 }
 
 .rec-form-title,
+.rec-form-author,
+.rec-submit {
+    padding: 0.75rem 1rem;
+    border: none;
+    background: var(--main);
+    color: var(--light);
+    -webkit-box-shadow: 5px 5px 0 0 var(--light);
+    box-shadow: 5px 5px 0 0 var(--light);
+    transition: all 250ms;
+}
+
+.rec-form-title,
 .rec-form-author {
     width: 100%;
-    padding: 0.75rem 1rem;
-
-    background: #000;
-    color: #fff;
-    border: none;
 }
 
 .rec-form-title::placeholder,
 .rec-form-author::placeholder {
-    color: #fff;
     text-transform: capitalize;
+    color: var(--light);
 }
 
-.rec-submit {
-    padding: 0.75rem 1rem;
-
-    background: #000;
-    color: #fff;
-    border: none;
+.rec-form-title:hover,
+.rec-form-author:hover,
+.rec-submit:hover,
+.rec-form-title:focus,
+.rec-form-author:focus,
+.rec-submit:focus {
+    -webkit-box-shadow: -10px 10px 0 0 var(--light);
+    box-shadow: -10px 10px 0 0 var(--light);
 }
 
-@media (min-width: 500px) {
+.rec-submit:hover,
+.rec-submit:focus {
+    background: var(--accent);
+}
+
+/* ===== bookcase - rec break at 500px ===== */
+@media (min-width: 550px) {
 
     .bookcase {
         flex-flow: row nowrap;
@@ -243,14 +329,36 @@ html {
     .rec-form-wrapper {
         width: 50%;
         height: 100%;
+        background: var(--main);
     }
 
     .rec-form {
         height: 40%;
+        padding: 5% 0 5% 10%;
     }
-/*
+
+    .rec-form-title,
+    .rec-form-author,
     .rec-submit {
-        align-self: flex-start;
-    } */
+        background: var(--light);
+        color: var(--main);
+        -webkit-box-shadow: 5px 5px 0 0 var(var(--dark));
+        box-shadow: 5px 5px 0 0 var(--dark);
+    }
+
+    .rec-form-title::placeholder,
+    .rec-form-author::placeholder {
+        color: var(--main);
+    }
+
+    .rec-form-title:hover,
+    .rec-form-author:hover,
+    .rec-submit:hover,
+    .rec-form-title:focus,
+    .rec-form-author:focus,
+    .rec-submit:focus {
+        -webkit-box-shadow: -10px 10px 0 0 var(--dark);
+        box-shadow: -10px 10px 0 0 var(--dark);
+    }
 
 }
