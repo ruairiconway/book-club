@@ -40,7 +40,6 @@ function generateBookHtml() {
     let pDesc = $('<p>').addClass('book-desc')
     $('.detail-wrapper').append(h2Title, pTitle, pAuthor, pDesc) // append titles, and book details to detail-wrapper
     let imgCover = $('<div>').addClass('book-img')
-    // let imgCover = $('<img>').addClass('book-img')
     $('.img-wrapper').append(imgCover) // append book-cover to image wrapper
 }
 
@@ -186,10 +185,6 @@ function showBookImage(object) { // book image
     $('.book-img').css({
         'background-image': `url(${object.cover})`,
     })
-    // $('.book-img').attr({
-    //     src: `${object.cover}`,
-    //     alt: `cover artwork for "${object.title}"`
-    // })
 }
 
 function showRecDetails() {  // rec details
