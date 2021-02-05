@@ -39,7 +39,8 @@ function generateBookHtml() {
     let pAuthor = $('<p>').addClass('book-author')
     let pDesc = $('<p>').addClass('book-desc')
     $('.detail-wrapper').append(h2Title, pTitle, pAuthor, pDesc) // append titles, and book details to detail-wrapper
-    let imgCover = $('<img>').addClass('book-img')
+    let imgCover = $('<div>').addClass('book-img')
+    // let imgCover = $('<img>').addClass('book-img')
     $('.img-wrapper').append(imgCover) // append book-cover to image wrapper
 }
 
@@ -75,8 +76,8 @@ function generateRecHtml() {
     }).addClass('rec-form-author')
     let buttonSub = $('<button>').attr({
         type: "submit",
-        value: "share"
-    }).addClass('rec-submit').text('share')
+        value: "send"
+    }).addClass('rec-submit').text('send')
     $('.rec-form').append(inputTitle, inputAuthor, buttonSub) // form items append to rec-form
 }
 
@@ -182,10 +183,13 @@ function showBookDetails(object) {  // book details
 }
 
 function showBookImage(object) { // book image
-    $('.book-img').attr({
-        src: `${object.cover}`,
-        alt: `cover artwork for "${object.title}"`
+    $('.book-img').css({
+        'background-image': `url(${object.cover})`,
     })
+    // $('.book-img').attr({
+    //     src: `${object.cover}`,
+    //     alt: `cover artwork for "${object.title}"`
+    // })
 }
 
 function showRecDetails() {  // rec details
