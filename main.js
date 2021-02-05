@@ -13,7 +13,7 @@ const scrollWatchDelay = 1250
 const animateOutMax = 700 // has to be >= than the rest. It's when handleBookcaseState() kicks in.
 const animateMonthTime = 350
 const animateContentTime = 700
-const animateImgTime = 500
+const animateImgTime = 700
 const animateFormTime = 500
 // date/library object
 const currentMonthNum = new Date().getMonth()
@@ -29,28 +29,34 @@ const formEndpoint = 'https://formspree.io/f/xleovrdl'
 
 // ================ GENERATE
 
-function generateBookcaseTitle() {
-    let h2Title = $('<h2>').addClass('month')
-    $('.bookcase').append(h2Title) // append month to bookcase
-}
+let h2Title = $('<h2>').addClass('month') // append month to bookcase
 
 function generateBookHtml() {
-    generateBookcaseTitle()
+    let imgWrapper = $('<div>').addClass('img-wrapper')
+    let divdetailWrapper = $('<div>').addClass('detail-wrapper')
+    $('.bookcase').append(divdetailWrapper, imgWrapper) // append book and image wrappers to bookcase
     let pTitle = $('<p>').addClass('book-title')
     let pAuthor = $('<p>').addClass('book-author')
-    let imgCover = $('<img>').addClass('book-img')
     let pDesc = $('<p>').addClass('book-desc')
-    $('.bookcase').append(pTitle, pAuthor, imgCover, pDesc) // append book details to bookcase
+    $('.detail-wrapper').append(h2Title, pTitle, pAuthor, pDesc) // append titles, and book details to detail-wrapper
+    let imgCover = $('<img>').addClass('book-img')
+    $('.img-wrapper').append(imgCover) // append book-cover to image wrapper
 }
 
 function generateRecHtml() {
-    generateBookcaseTitle()
-    let pRec = $('<p>').addClass('rec-title')
+    let divRecTextWrapper = $('<div>').addClass('rec-text-wrapper')
+    let divRecFormWrapper = $('<div>').addClass('rec-form-wrapper')
+    $('.bookcase').append(divRecTextWrapper, divRecFormWrapper) // append rec wrappers to bookcase
+    let divRecHeaderWrapper = $('<div>').addClass('rec-header-wrapper')
+    $('.rec-text-wrapper').append(h2Title, divRecHeaderWrapper) // append title and header wrapper to text-wrapper
+    let pRec1 = $('<p>').addClass('rec-text rec-text-1')
+    let pRec2 = $('<p>').addClass('rec-text rec-text-2')
+    $('.rec-header-wrapper').append(pRec1, pRec2) // append text to header-wrapper
     let formRec = $('<form>').attr({
         action: `${formEndpoint}`,
         method: 'POST'
     }).addClass('rec-form')
-    $('.bookcase').append(pRec, formRec) // rec title + form append to bookcase
+    $('.rec-form-wrapper').append(formRec) // rec title + form append to bookcase
     let inputTitle = $('<input>').attr({
         type: "text",
         name: "rec-form-title",
@@ -98,13 +104,12 @@ function animateMonthIn() { // month in
 }
 
 function animateBookcaseBookOut(object) { // book out
-    const imgWidth = $('.book-img').css('width')
     animateMonthOut()
     $('.book-title, .book-author, .book-desc').animate({
         opacity: 0
     }, animateContentTime, "swing")
     $('.book-img').animate({
-        right: `-${imgWidth}`
+        left: "140%"
     }, animateImgTime, "swing")
     setTimeout( () => {
         handleBookcaseState(object)
@@ -112,7 +117,6 @@ function animateBookcaseBookOut(object) { // book out
 }
 
 function animateBookcaseBookIn() { // book in
-    const imgWidth = $('.book-img').css('width')
     animateMonthIn()
     $('.book-title, .book-author, .book-desc').css({
         opacity: 0
@@ -120,16 +124,16 @@ function animateBookcaseBookIn() { // book in
         opacity: 1
     }, animateContentTime, "swing")
     $('.book-img').css({
-        right: `-${imgWidth}`
+        left: "150%",
     }).animate({
-        right: 0
+        left: "50%"
     }, animateImgTime, "swing")
 }
 
 function animateBookcaseRecOut(object) { // rec out
     const recFormWidth = $('.rec-form').css('width')
     animateMonthOut()
-    $('.rec-title').animate({
+    $('.rec-text').animate({
         opacity: 0
     }, animateContentTime, "swing")
     $('.rec-form').animate({
@@ -143,7 +147,7 @@ function animateBookcaseRecOut(object) { // rec out
 function animateBookcaseRecIn() { // rec in
     const recFormWidth = $('.rec-form').css('width')
     animateMonthIn()
-    $('.rec-title').css({
+    $('.rec-text').css({
         opacity: 0
     }).animate({
         opacity: 1
@@ -185,8 +189,10 @@ function showBookImage(object) { // book image
 }
 
 function showRecDetails() {  // rec details
-    let formHeader = 'know any good books?'
-    $('.rec-title').html(formHeader)
+    let recHeader1 = 'Know any good books?'
+    let recHeader2 = 'Send me your favourites.'
+    $('.rec-text-1').html(recHeader1)
+    $('.rec-text-2').html(recHeader2)
 }
 
 
