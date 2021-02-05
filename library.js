@@ -15,7 +15,7 @@ const library = [
         title: "1984",
         author: "george orwell",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices.",
-        cover: "./assets/human-kind.jpg"
+        cover: "./assets/1984.jpg"
     },
     {
         index: 3,
@@ -24,7 +24,7 @@ const library = [
         title: "mythos",
         author: "stephen fry",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mattis auctor nibh eget rutrum. Fusce ut dui ultrices.",
-        cover: "./assets/human-kind.jpg"
+        cover: "./assets/mythos.jpg"
     },
     {
         index: 4,
