@@ -209,8 +209,8 @@ button {
     transform: translateX(-50%);
     width: 75%;
     height: 65%;
-    -webkit-box-shadow: 5px 5px 0 0 var(--light);
     box-shadow: 5px 5px 0 0 var(--light);
+    -webkit-box-shadow: 5px 5px 0 0 var(--light);
 }
 
 /* ===== bookcase - book break at 500px  ====== */
@@ -231,8 +231,8 @@ button {
         background-blend-mode: unset;
         width: 55%;
         height: 75%;
-        -webkit-box-shadow: 5px 5px 0 0 var(--dark);
         box-shadow: 5px 5px 0 0 var(--dark);
+        -webkit-box-shadow: 5px 5px 0 0 var(--dark);
     }
 
 }
@@ -285,8 +285,8 @@ button {
     border: none;
     background: var(--main);
     color: var(--light);
-    -webkit-box-shadow: 5px 5px 0 0 var(--light);
     box-shadow: 5px 5px 0 0 var(--light);
+    -webkit-box-shadow: 5px 5px 0 0 var(--light);
     transition: all 250ms;
 }
 
@@ -308,8 +308,8 @@ button {
 .rec-form-title:focus,
 .rec-form-author:focus,
 .rec-submit:focus {
-    -webkit-box-shadow: -10px 10px 0 0 var(--light);
     box-shadow: -10px 10px 0 0 var(--light);
+    -webkit-box-shadow: -10px 10px 0 0 var(--light);
 }
 
 .rec-submit:hover,
@@ -350,8 +350,8 @@ button {
     .rec-submit {
         background: var(--light);
         color: var(--main);
-        -webkit-box-shadow: 5px 5px 0 0 var(var(--dark));
         box-shadow: 5px 5px 0 0 var(--dark);
+        -webkit-box-shadow: 5px 5px 0 0 var(var(--dark));
     }
 
     .rec-form-title::placeholder,
@@ -365,8 +365,8 @@ button {
     .rec-form-title:focus,
     .rec-form-author:focus,
     .rec-submit:focus {
-        -webkit-box-shadow: -10px 10px 0 0 var(--dark);
         box-shadow: -10px 10px 0 0 var(--dark);
+        -webkit-box-shadow: -10px 10px 0 0 var(--dark);
     }
 
 }
