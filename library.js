@@ -29,47 +29,47 @@ const library = [
     {
         index: 4,
         month: "apr",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "atomic design",
+        author: "brad frost",
+        desc: "From atoms to pages. A galaxy of design-based ideas.",
+        cover: "./assets/atomic-design.png"
     },
     {
         index: 5,
         month: "may",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "the vanishing half",
+        author: "britt bennett",
+        desc: "A TIME Magazine novel of the year. Let's give it a go.",
+        cover: "./assets/the-vanishing-half.png"
     },
     {
         index: 6,
         month: "jun",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "grown ups",
+        author: "marian keyes",
+        desc: "A knock to the head, and all the tea is spilled.",
+        cover: "./assets/grown-ups.png"
     },
     {
         index: 7,
         month: "jul",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "skippy dies",
+        author: "paul murray",
+        desc: "jam donuts do damage",
+        cover: "./assets/skippy-dies.png"
     },
     {
         index: 8,
         month: "aug",
-        book: false,
-        title: "",
-        author: "",
-        desc: "",
-        cover: ""
+        book: true,
+        title: "cherry",
+        author: "Nico Walker",
+        desc: "An unnamed narrator, from Iraq to the bank.",
+        cover: "./assets/cherry.png"
     },
     {
         index: 9,
