@@ -3,9 +3,13 @@
 ## Brief
 As part of a new years resolution, I'm trying to read one book per month. To help me on my way, I built this site as an excuse to show off the books as well as some new learning in jQuery + CSS.
 
-## Links
-- Live: https://ruairiconway.github.io/book-club/
+## View
 - Code: https://github.com/ruairiconway/book-club
+- Live: https://ruairiconway.github.io/book-club/
+
+| Desktop | Mobile |
+|---------|--------|
+| ![desktop view of protfolio](/readme-assets/desktop.png) | ![mobile view of protfolio](/readme-assets/mobile.png) |
 
 ## Highlights
 - Site renders based on object array library.js (where all the book details are stored).
@@ -15,7 +19,7 @@ As part of a new years resolution, I'm trying to read one book per month. To hel
 - Users can navigate using scroll, swipe, or arrows keys for accessibility.
 - Included Hammer.js plugin to aid with mobile interaction. https://hammerjs.github.io/
 
-## Future Edits
+## To Dos
 - Debug mobile display cutting off on chrome & safari. Works well on Firefox.
 - Fix arrow navigation
 - Add in UI indication to scroll up or down as a prompt
